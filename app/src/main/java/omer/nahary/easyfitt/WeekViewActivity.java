@@ -27,6 +27,8 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
     private ListView eventListView;
+    private EventAdapter eventAdapter;
+    private ArrayList<Event> eventsForSelectedDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +38,11 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
 
         monthYearText = findViewById(R.id.monthYearTV);
         calendarRecyclerView = findViewById(R.id.calendarRecyclerView);
-        eventListView = findViewById(R.id.listView); // אם תוסיף id ל-ListView
+        eventListView = findViewById(R.id.listView);
+
+        eventsForSelectedDate = new ArrayList<>();
+        eventAdapter = new EventAdapter(this, eventsForSelectedDate);
+        eventListView.setAdapter(eventAdapter);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -45,6 +51,7 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
         });
 
         setWeekView();
+        updateEventsForSelectedDate();
     }
 
     private void setWeekView() {
@@ -58,22 +65,39 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
     public void previousweekAction(View view) {
         selectedDate = selectedDate.minusWeeks(1);
         setWeekView();
+        updateEventsForSelectedDate();
     }
 
     public void nextweekAction(View view) {
         selectedDate = selectedDate.plusWeeks(1);
         setWeekView();
+        updateEventsForSelectedDate();
     }
 
     @Override
     public void onItemClick(int position, String dayText) {
         if (!dayText.equals("")) {
-            String message = "Selected date: " + dayText + " " + monthYearFromDate(selectedDate);
+            int day = Integer.parseInt(dayText);
+            selectedDate = selectedDate.withDayOfMonth(day);
+
+            String message = "Selected date: " + selectedDate.toString();
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+
+            updateEventsForSelectedDate();
         }
     }
 
     public void nextEventAction(View view) {
         startActivity(new Intent(this, EventEditActivity.class));
+    }
+
+    private void updateEventsForSelectedDate() {
+        eventsForSelectedDate.clear();
+        for (Event event : Event.allEvents) {
+            if (event.getDate().isEqual(selectedDate)) {
+                eventsForSelectedDate.add(event);
+            }
+        }
+        eventAdapter.notifyDataSetChanged();
     }
 }
