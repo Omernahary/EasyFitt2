@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <!-- תאריך נבחר -->
     <TextView
         android:id="@+id/selectedDateText"
         android:layout_width="wrap_content"
@@ -15,15 +14,38 @@
         android:textSize="18sp"
         android:layout_gravity="center"/>
 
-    <!-- שדה להזנת שם האירוע -->
-    <EditText
-        android:id="@+id/eventNameInput"
+    <!-- בחירת סוג פעילות -->
+    <RadioGroup
+        android:id="@+id/eventTypeGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter event name"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:gravity="center">
+
+        <RadioButton
+            android:id="@+id/runRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Run"/>
+
+        <RadioButton
+            android:id="@+id/workoutRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Workout"/>
+    </RadioGroup>
+
+    <!-- בחירת שעה -->
+    <TimePicker
+        android:id="@+id/timePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:timePickerMode="spinner"
         android:layout_marginTop="20dp"/>
 
-    <!-- כפתור לשמירת האירוע -->
+    <!-- כפתור שמירה -->
     <Button
         android:id="@+id/saveEventButton"
         android:layout_width="wrap_content"

@@ -24,7 +24,10 @@ public class EventAdapter extends ArrayAdapter<Event> {
         }
 
         TextView eventName = convertView.findViewById(R.id.eventNameText);
-        eventName.setText(event.getName());
+
+        if (event != null) {
+            eventName.setText(event.getEventType() + " at " + event.getDateTime().toLocalTime());
+        }
 
         return convertView;
     }

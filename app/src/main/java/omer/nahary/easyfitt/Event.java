@@ -1,34 +1,26 @@
 package omer.nahary.easyfitt;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class Event {
-    private String name;
-    private LocalDate date;
+public abstract class Event {
 
-    // רשימה סטטית לשמירת כל האירועים
+    protected LocalDateTime dateTime;
+
     public static ArrayList<Event> allEvents = new ArrayList<>();
 
-    public Event(String name, LocalDate date) {
-        this.name = name;
-        this.date = date;
-        allEvents.add(this); // מוסיף את האירוע לרשימה סטטית
+    public Event(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+        allEvents.add(this);
     }
 
-    public String getName() {
-        return name;
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
+    public abstract String getEventType();
 }

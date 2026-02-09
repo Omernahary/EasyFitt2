@@ -15,7 +15,6 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static omer.nahary.easyfitt.CalendarUtils.daysInWeekArray;
@@ -94,7 +93,8 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
     private void updateEventsForSelectedDate() {
         eventsForSelectedDate.clear();
         for (Event event : Event.allEvents) {
-            if (event.getDate().isEqual(selectedDate)) {
+            // כאן מתבצעת ההתאמה ל-Event האבסטרקטי החדש
+            if (event.getDateTime().toLocalDate().isEqual(selectedDate)) {
                 eventsForSelectedDate.add(event);
             }
         }

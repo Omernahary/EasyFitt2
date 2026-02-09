@@ -30,23 +30,30 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // חיבור ל־UI
         calendarRecyclerView = findViewById(R.id.calendarRecyclerView);
         monthYearText = findViewById(R.id.monthYearTV);
 
+        // EdgeToEdge padding
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
+        // הגדרת תאריך נבחר
         selectedDate = LocalDate.now();
+
+        // הצגת חודש
         setMonthView();
     }
 
     private void setMonthView() {
         monthYearText.setText(monthYearFromDate(selectedDate));
+
         ArrayList<String> days = daysInMonthArray(selectedDate);
         CalendarAdapter calendarAdapter = new CalendarAdapter(days, this);
+
         calendarRecyclerView.setLayoutManager(new GridLayoutManager(this, 7));
         calendarRecyclerView.setAdapter(calendarAdapter);
     }
@@ -63,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
 
     @Override
     public void onItemClick(int position, String dayText) {
-        if (!dayText.equals("")) {
+        if (!dayText.isEmpty()) {
             String message = "Selected date: " + dayText + " " + monthYearFromDate(selectedDate);
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         }

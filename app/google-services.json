@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "585086869192",
+    "project_id": "easyfitt-ab404",
+    "storage_bucket": "easyfitt-ab404.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:585086869192:android:c9aaaf68028a7e7a420ffd",
+        "android_client_info": {
+          "package_name": "omer.nahary.easyfitt"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfsOqP5yWADYlbt6nwjWAaIuUUtKbbg6U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

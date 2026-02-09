@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/cal"
+        android:icon="@drawable/cal"
+        android:title="calender" />
+    <item
+        android:id="@+id/rec"
+        android:title="recpies"
+        android:icon="@drawable/cal" />
+
+</menu>
