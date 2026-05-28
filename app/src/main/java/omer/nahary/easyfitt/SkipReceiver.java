@@ -13,7 +13,7 @@ public class SkipReceiver extends BroadcastReceiver {
 
         Event.loadEvents(context);
 
-        if (Event.allEvents != null) {
+        if (Event.allEvents != null) {//commit
             for (Event e : Event.allEvents) {
                 if (e.getDateTime() != null && e.getDateTime().toString().equals(eventTime)) {
                     // כאן הקסם: מסמנים כנכשל (איקס)
