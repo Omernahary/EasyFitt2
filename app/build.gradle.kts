@@ -47,6 +47,8 @@ dependencies {
     implementation(libs.credentials.play.services.auth)
     implementation(libs.googleid)
     implementation(libs.firebase.database)
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("org.json:json:20231013")
 
     // פיירבייס וכלים נוספים
     implementation("com.google.firebase:firebase-firestore")
