@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,7 +16,23 @@
         android:theme="@style/Theme.EasyFitt"
         tools:targetApi="31">
 
-        <!-- Start Activity = Launcher -->
+        <activity
+            android:name=".UserSetupActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name=".WorkoutEditorActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".WorkoutAIFragment"
+            android:exported="false" />
+
+        <activity
+            android:name=".WeeklyGoalsActivity"
+            android:exported="false" />
+
         <activity
             android:name=".Start"
             android:exported="true">
@@ -23,17 +42,14 @@
             </intent-filter>
         </activity>
 
-        <!-- Login -->
         <activity
             android:name=".Login"
             android:exported="false" />
 
-        <!-- Register -->
         <activity
             android:name=".Registerr"
             android:exported="false" />
 
-        <!-- Main -->
         <activity
             android:name=".MainActivity"
             android:exported="true" />
@@ -44,6 +60,16 @@
 
         <activity
             android:name=".WeekViewActivity"
+            android:exported="false" />
+
+        <receiver
+            android:name=".CheckEventReceiver"
+            android:exported="false" />
+        <receiver
+            android:name=".DoneReceiver"
+            android:exported="false" />
+        <receiver
+            android:name=".SkipReceiver"
             android:exported="false" />
 
     </application>

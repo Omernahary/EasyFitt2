@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F9FA">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit Your Plan 🥗"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:textColor="#2E7D32"
+            android:layout_marginBottom="20dp"/>
+
+        <EditText
+            android:id="@+id/et_setup_weight"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:hint="Weight (kg)"
+            android:textSize="20sp"
+            android:inputType="numberDecimal"
+            android:layout_marginBottom="15dp"/>
+
+        <RadioGroup
+            android:id="@+id/rg_setup_goal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp">
+            <RadioButton android:id="@+id/rb_setup_mass" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Bulk" android:textSize="18sp" android:layout_marginEnd="20dp"/>
+            <RadioButton android:id="@+id/rb_setup_cut" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Cut" android:textSize="18sp"/>
+        </RadioGroup>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Proteins:" android:textSize="20sp" android:textStyle="bold" android:textColor="#E91E63"/>
+        <GridLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:columnCount="2">
+            <CheckBox android:id="@+id/cb_chicken" android:text="Chicken" android:textSize="18sp"/>
+            <CheckBox android:id="@+id/cb_beef" android:text="Beef" android:textSize="18sp"/>
+            <CheckBox android:id="@+id/cb_fish" android:text="Fish" android:textSize="18sp"/>
+            <CheckBox android:id="@+id/cb_tuna" android:text="Tuna" android:textSize="18sp"/>
+            <CheckBox android:id="@+id/cb_eggs" android:text="Eggs" android:textSize="18sp"/>
+            <CheckBox android:id="@+id/cb_tofu" android:text="Tofu" android:textSize="18sp"/>
+        </GridLayout>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Carbs:" android:textSize="20sp" android:textStyle="bold" android:textColor="#FF9800" android:layout_marginTop="10dp"/>
+        <GridLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:columnCount="2">
+            <CheckBox android:id="@+id/cb_rice" android:text="Rice" android:textSize="18sp"/>
+            <CheckBox android:id="@+id/cb_potato" android:text="Potato" android:textSize="18sp"/>
+            <CheckBox android:id="@+id/cb_pasta" android:text="Pasta" android:textSize="18sp"/>
+            <CheckBox android:id="@+id/cb_oatmeal" android:text="Oatmeal" android:textSize="18sp"/>
+            <CheckBox android:id="@+id/cb_quinoa" android:text="Quinoa" android:textSize="18sp"/>
+            <CheckBox android:id="@+id/cb_bread" android:text="Bread" android:textSize="18sp"/>
+        </GridLayout>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Extras:" android:textSize="20sp" android:textStyle="bold" android:textColor="#4CAF50" android:layout_marginTop="10dp"/>
+        <GridLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:columnCount="2">
+            <CheckBox android:id="@+id/cb_avocado" android:text="Avocado" android:textSize="18sp"/>
+            <CheckBox android:id="@+id/cb_nuts" android:text="Nuts" android:textSize="18sp"/>
+            <CheckBox android:id="@+id/cb_salad" android:text="Salad" android:textSize="18sp"/>
+            <CheckBox android:id="@+id/cb_veggies" android:text="Veggies" android:textSize="18sp"/>
+        </GridLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="30dp"
+            android:weightSum="2">
+
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="0dp"
+                android:layout_height="65dp"
+                android:layout_weight="1"
+                android:text="CANCEL"
+                android:textSize="18sp"
+                android:layout_marginEnd="8dp"
+                android:backgroundTint="#BDBDBD"
+                android:textColor="#000" />
+
+            <Button
+                android:id="@+id/btn_generate_plan"
+                android:layout_width="0dp"
+                android:layout_height="65dp"
+                android:layout_weight="1"
+                android:text="SAVE"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:backgroundTint="#2E7D32"
+                android:textColor="#FFF" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

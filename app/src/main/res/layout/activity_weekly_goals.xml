@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="32dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Weekly Goals"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:textColor="#5C5C5C"
+            android:layout_marginBottom="40dp"
+            android:layout_marginTop="30dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="amount of workouts per week ?"
+            android:textSize="18sp"
+            android:layout_marginBottom="8dp"/>
+
+        <EditText
+            android:id="@+id/targetWorkoutsEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="for example: 3"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:layout_marginBottom="24dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="amount of runs per week ?"
+            android:textSize="18sp"
+            android:layout_marginBottom="8dp"/>
+
+        <EditText
+            android:id="@+id/targetRunsEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="for example: 2"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:layout_marginBottom="40dp"/>
+
+        <Button
+            android:id="@+id/saveGoalsButton"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="Save Goals"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:padding="12dp"
+            android:backgroundTint="#F8DAB9"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="16dp"/>
+
+        <Button
+            android:id="@+id/backButtonGoals"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:padding="12dp"
+            android:backgroundTint="#C9A66B"
+            android:textColor="#FFFFFF"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#CCCCCC"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="24dp"/>
+
+        <TextView
+            android:id="@+id/workoutsProgressText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Workouts: 0/0"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:id="@+id/runsProgressText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Runs: 0/0"
+            android:textSize="18sp"
+            android:textAlignment="center"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="10dp">
+
+        <FrameLayout
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginEnd="40dp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_workout"
+                android:alpha="0.2" />
+            <ImageView
+                android:id="@+id/workoutIconFill"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/workout_clip" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="100dp"
+            android:layout_height="100dp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_run"
+                android:alpha="0.2" />
+            <ImageView
+                android:id="@+id/runIconFill"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/run_clip" />
+        </FrameLayout>
+    </LinearLayout>
+</RelativeLayout>

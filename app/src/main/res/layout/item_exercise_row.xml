@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <EditText
+            android:id="@+id/etExerciseName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:hint="Name"
+            android:textSize="14sp"/>
+
+        <EditText
+            android:id="@+id/etSets"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.6"
+            android:hint="Sets"
+            android:inputType="number"
+            android:gravity="center"
+            android:textSize="12sp"/>
+
+        <EditText
+            android:id="@+id/etMinReps"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.6"
+            android:hint="Min"
+            android:inputType="number"
+            android:gravity="center"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-" />
+
+        <EditText
+            android:id="@+id/etMaxReps"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.6"
+            android:hint="Max"
+            android:inputType="number"
+            android:gravity="center"
+            android:textSize="12sp"/>
+
+        <EditText
+            android:id="@+id/etActualReps"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:hint="Done"
+            android:inputType="number"
+            android:gravity="center"
+            android:textColor="#E91E63"
+            android:textSize="13sp"/>
+
+        <EditText
+            android:id="@+id/etWeight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:hint="kg"
+            android:inputType="numberDecimal"
+            android:gravity="center"
+            android:textSize="13sp"/>
+
+        <ImageButton
+            android:id="@+id/btnDeleteExercise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:src="@android:drawable/ic_menu_delete"
+            app:tint="#FF1744" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvAiRecommendation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="AI: Waiting for results..."
+        android:textColor="#2196F3"
+        android:textSize="12sp"
+        android:textStyle="italic"
+        android:paddingLeft="10dp"/>
+
+</LinearLayout>

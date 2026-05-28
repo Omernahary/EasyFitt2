@@ -1,6 +1,9 @@
 package omer.nahary.easyfitt;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
@@ -29,6 +32,9 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
     private EventAdapter eventAdapter;
     private ArrayList<Event> eventsForSelectedDate;
 
+    // רסיבר להאזנה לעדכונים בזמן אמת מה-MainActivity
+    private BroadcastReceiver refreshReceiver;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +45,9 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
         calendarRecyclerView = findViewById(R.id.calendarRecyclerView);
         eventListView = findViewById(R.id.listView);
 
+        // טעינה ראשונית של האירועים מהזיכרון
+        Event.loadEvents(this);
+
         eventsForSelectedDate = new ArrayList<>();
         eventAdapter = new EventAdapter(this, eventsForSelectedDate);
         eventListView.setAdapter(eventAdapter);
@@ -48,6 +57,22 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        // הגדרת הרסיבר לעדכון מיידי של התצוגה
+        refreshReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Event.loadEvents(WeekViewActivity.this);
+                updateEventsForSelectedDate();
+                setWeekView(); // מרענן גם את ה-V/X בלוח השנה למעלה
+            }
+        };
+        // רישום הרסיבר למערכת
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+            registerReceiver(refreshReceiver, new IntentFilter("com.omer.easyfitt.REFRESH_EVENTS"), Context.RECEIVER_EXPORTED);
+        } else {
+            registerReceiver(refreshReceiver, new IntentFilter("com.omer.easyfitt.REFRESH_EVENTS"));
+        }
 
         setWeekView();
         updateEventsForSelectedDate();
@@ -76,13 +101,17 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
     @Override
     public void onItemClick(int position, String dayText) {
         if (!dayText.equals("")) {
-            int day = Integer.parseInt(dayText);
-            selectedDate = selectedDate.withDayOfMonth(day);
+            try {
+                int day = Integer.parseInt(dayText);
+                selectedDate = selectedDate.withDayOfMonth(day);
 
-            String message = "Selected date: " + selectedDate.toString();
-            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+                String message = "Selected date: " + selectedDate.toString();
+                Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 
-            updateEventsForSelectedDate();
+                updateEventsForSelectedDate();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -90,14 +119,44 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
         startActivity(new Intent(this, EventEditActivity.class));
     }
 
+    public void backToMainAction(View view) {
+        finish();
+    }
+
     private void updateEventsForSelectedDate() {
+        if (eventsForSelectedDate == null) eventsForSelectedDate = new ArrayList<>();
         eventsForSelectedDate.clear();
-        for (Event event : Event.allEvents) {
-            // כאן מתבצעת ההתאמה ל-Event האבסטרקטי החדש
-            if (event.getDateTime().toLocalDate().isEqual(selectedDate)) {
-                eventsForSelectedDate.add(event);
+
+        if (Event.allEvents != null) {
+            for (Event event : Event.allEvents) {
+                if (event == null || event.getDateTime() == null) continue;
+
+                if (event.getDateTime().toLocalDate().isEqual(selectedDate)) {
+                    eventsForSelectedDate.add(event);
+                }
             }
         }
-        eventAdapter.notifyDataSetChanged();
+
+        if (eventAdapter != null) {
+            eventAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // קריטי: טוען מחדש את האירועים מהדיסק למקרה שסומן "ביצעתי" בהתראה
+        Event.loadEvents(this);
+        // מעדכן את הרשימה שמוצגת על המסך
+        updateEventsForSelectedDate();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // הסרת רישום הרסיבר כדי למנוע דליפת זיכרון
+        if (refreshReceiver != null) {
+            unregisterReceiver(refreshReceiver);
+        }
     }
 }

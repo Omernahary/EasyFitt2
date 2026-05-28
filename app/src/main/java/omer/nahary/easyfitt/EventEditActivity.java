@@ -1,7 +1,6 @@
 package omer.nahary.easyfitt;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -12,6 +11,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.ZoneId;
+import java.util.Calendar;
+import java.util.TimeZone;
 
 import static omer.nahary.easyfitt.CalendarUtils.selectedDate;
 
@@ -35,33 +38,49 @@ public class EventEditActivity extends AppCompatActivity {
         timePicker = findViewById(R.id.timePicker);
         saveEventButton = findViewById(R.id.saveEventButton);
 
-        // הצגת התאריך הנבחר
-        selectedDateText.setText("Selected date: " + selectedDate.toString());
+        // הכרחת ה-TimePicker להראות את זמן ישראל (Asia/Jerusalem)
+        // זה יפתור את הפער של השעתיים אם המכשיר מוגדר על UTC
+        TimeZone israelTime = TimeZone.getTimeZone("Asia/Jerusalem");
+        Calendar now = Calendar.getInstance(israelTime);
 
+        int currentHour = now.get(Calendar.HOUR_OF_DAY);
+        int currentMinute = now.get(Calendar.MINUTE);
+
+        timePicker.setIs24HourView(true);
+        timePicker.setHour(currentHour);
+        timePicker.setMinute(currentMinute);
+
+        selectedDateText.setText("Date: " + selectedDate.toString());
         saveEventButton.setOnClickListener(v -> saveEvent());
     }
 
     private void saveEvent() {
         int selectedId = eventTypeGroup.getCheckedRadioButtonId();
         if (selectedId == -1) {
-            Toast.makeText(this, "בחר סוג פעילות", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please choose activity", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // קבלת שעה ודקה מה-TimePicker
         int hour = timePicker.getHour();
         int minute = timePicker.getMinute();
 
+        // יצירת אובייקט זמן לפי מה שהמשתמש בחר ב-UI
         LocalDateTime dateTime = selectedDate.atTime(hour, minute);
 
-        Event event;
+        Event newEvent;
         if (selectedId == runRadioButton.getId()) {
-            event = new RunEvent(dateTime);
+            newEvent = new RunEvent(dateTime);
         } else {
-            event = new WorkoutEvent(dateTime);
+            newEvent = new WorkoutEvent(dateTime);
         }
 
-        Toast.makeText(this, event.getEventType() + " saved!", Toast.LENGTH_SHORT).show();
-        finish(); // סוגר וחוזר ללוח שנה
+        Event.allEvents.add(newEvent);
+        Event.saveEvents(this);
+
+        // שליחה להלפר
+        EventAlarmHelper.setEventAlarm(this, newEvent);
+
+        Toast.makeText(this, "Event Saved!", Toast.LENGTH_SHORT).show();
+        finish();
     }
 }
