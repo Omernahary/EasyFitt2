@@ -1,0 +1,97 @@
+package omer.nahary.easyfitt;
+
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+import java.util.ArrayList;
+
+public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ExerciseViewHolder> {
+
+    private ArrayList<Exercise> exercises;
+
+    public ExerciseAdapter(ArrayList<Exercise> exercises) {
+        this.exercises = exercises;
+    }
+
+    @NonNull
+    @Override
+    public ExerciseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_exercise_row, parent, false);
+        return new ExerciseViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ExerciseViewHolder holder, int position) {
+        Exercise exercise = exercises.get(holder.getAdapterPosition());
+
+        holder.etName.setText(exercise.getName());
+        holder.etSets.setText(String.valueOf(exercise.getSets()));
+        holder.etMin.setText(String.valueOf(exercise.getMinReps()));
+        holder.etMax.setText(String.valueOf(exercise.getMaxReps()));
+        holder.etWeight.setText(String.valueOf(exercise.getWeight()));
+        holder.etActual.setText(exercise.getActualReps() == 0 ? "" : String.valueOf(exercise.getActualReps()));
+
+        updateAiView(holder, exercise);
+
+        holder.btnDelete.setOnClickListener(v -> {
+            int currentPos = holder.getAdapterPosition();
+            exercises.remove(currentPos);
+            notifyItemRemoved(currentPos);
+            notifyItemRangeChanged(currentPos, exercises.size());
+        });
+
+        holder.etActual.addTextChangedListener(new SimpleTextWatcher(s -> {
+            exercise.setActualReps(parseSafe(s));
+            updateAiView(holder, exercise);
+        }));
+
+        holder.etName.addTextChangedListener(new SimpleTextWatcher(exercise::setName));
+        holder.etSets.addTextChangedListener(new SimpleTextWatcher(s -> exercise.setSets(parseSafe(s))));
+        holder.etMin.addTextChangedListener(new SimpleTextWatcher(s -> exercise.setMinReps(parseSafe(s))));
+        holder.etMax.addTextChangedListener(new SimpleTextWatcher(s -> exercise.setMaxReps(parseSafe(s))));
+        holder.etWeight.addTextChangedListener(new SimpleTextWatcher(s -> exercise.setWeight(parseSafeDouble(s))));
+    }
+
+    private void updateAiView(ExerciseViewHolder holder, Exercise exercise) {
+        holder.tvAi.setText(exercise.getAiRecommendation());
+    }
+
+    @Override
+    public int getItemCount() { return exercises.size(); }
+
+    static class ExerciseViewHolder extends RecyclerView.ViewHolder {
+        EditText etName, etSets, etMin, etMax, etActual, etWeight;
+        TextView tvAi;
+        ImageButton btnDelete;
+        public ExerciseViewHolder(@NonNull View itemView) {
+            super(itemView);
+            etName = itemView.findViewById(R.id.etExerciseName);
+            etSets = itemView.findViewById(R.id.etSets);
+            etMin = itemView.findViewById(R.id.etMinReps);
+            etMax = itemView.findViewById(R.id.etMaxReps);
+            etActual = itemView.findViewById(R.id.etActualReps);
+            etWeight = itemView.findViewById(R.id.etWeight);
+            tvAi = itemView.findViewById(R.id.tvAiRecommendation);
+            btnDelete = itemView.findViewById(R.id.btnDeleteExercise);
+        }
+    }
+
+    private int parseSafe(String s) { try { return Integer.parseInt(s); } catch (Exception e) { return 0; } }
+    private double parseSafeDouble(String s) { try { return Double.parseDouble(s); } catch (Exception e) { return 0.0; } }
+
+    interface SimpleWatcher { void onUpdate(String s); }
+    class SimpleTextWatcher implements TextWatcher {
+        SimpleWatcher sw;
+        SimpleTextWatcher(SimpleWatcher sw) { this.sw = sw; }
+        @Override public void afterTextChanged(Editable s) { sw.onUpdate(s.toString()); }
+        @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+        @Override public void onTextChanged(CharSequence s, int start, int before, int count) {}
+    }
+}

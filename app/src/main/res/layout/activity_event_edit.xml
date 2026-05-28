@@ -1,34 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/main"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:gravity="center_horizontal">
 
-    <!-- תאריך נבחר -->
     <TextView
         android:id="@+id/selectedDateText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Selected date"
-        android:textSize="18sp"
-        android:layout_gravity="center"/>
+        android:text="Selected Date: "
+        android:textSize="20sp"
+        android:layout_marginBottom="20dp"/>
 
-    <!-- שדה להזנת שם האירוע -->
-    <EditText
-        android:id="@+id/eventNameInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter event name"
-        android:layout_marginTop="20dp"/>
-
-    <!-- כפתור לשמירת האירוע -->
-    <Button
-        android:id="@+id/saveEventButton"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Select Activity Type:"
+        android:textSize="18sp"
+        android:layout_marginBottom="10dp"/>
+
+    <RadioGroup
+        android:id="@+id/eventTypeGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="20dp">
+
+        <RadioButton
+            android:id="@+id/runRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Run"
+            android:layout_marginEnd="20dp"/>
+
+        <RadioButton
+            android:id="@+id/workoutRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Workout"/>
+    </RadioGroup>
+
+    <TimePicker
+        android:id="@+id/timePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:timePickerMode="spinner"/>
+
+    <Button
+        android:id="@+id/saveEventButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
         android:text="Save Event"
-        android:layout_gravity="center"
         android:layout_marginTop="20dp"/>
+
 </LinearLayout>

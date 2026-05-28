@@ -5,10 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <!-- TextView להצגת שם האירוע -->
     <TextView
         android:id="@+id/eventNameText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Event name"
         android:textSize="18sp"

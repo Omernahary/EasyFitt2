@@ -1,15 +1,17 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
     namespace = "omer.nahary.easyfitt"
-    compileSdk = 36
+    // שינינו ל-35 כדי שיתאים לאמולטור החדש ולמנוע בעיות תאימות
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "omer.nahary.easyfitt"
         minSdk = 26
-        targetSdk = 36
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -32,11 +34,29 @@ android {
 }
 
 dependencies {
+    // מנגנון ה-BOM של פיירבייס
+    implementation(platform("com.google.firebase:firebase-bom:33.1.0"))
 
+    // ספריות קיימות מה-Catalog
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+    implementation(libs.firebase.auth)
+    implementation(libs.credentials)
+    implementation(libs.credentials.play.services.auth)
+    implementation(libs.googleid)
+    implementation(libs.firebase.database)
+
+    // פיירבייס וכלים נוספים
+    implementation("com.google.firebase:firebase-firestore")
+    implementation("com.google.firebase:firebase-storage")
+    implementation("com.google.code.gson:gson:2.10.1")
+
+    // גלייד - טעינת תמונות
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

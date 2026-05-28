@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F5F5F5">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="6dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tv_current_day_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Select Day"
+                    android:textSize="26sp"
+                    android:textColor="#212121"
+                    android:textStyle="bold"
+                    android:layout_centerVertical="true"/>
+
+                <ImageButton
+                    android:id="@+id/btn_edit_foods"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_alignParentEnd="true"
+                    android:src="@android:drawable/ic_input_add"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    app:tint="#2E7D32"
+                    android:scaleType="fitCenter"
+                    android:padding="5dp"/>
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/btn_switch_goal"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="#2E7D32"
+                android:text="Goal: Loading..."
+                android:textAllCaps="false"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:background="#E0E0E0"
+        android:padding="10dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button android:id="@+id/btn_sun" style="@style/Widget.MaterialComponents.Button.UnelevatedButton" android:layout_width="95dp" android:layout_height="65dp" android:text="SUN" android:textSize="16sp" android:layout_margin="5dp"/>
+            <Button android:id="@+id/btn_mon" style="@style/Widget.MaterialComponents.Button.UnelevatedButton" android:layout_width="95dp" android:layout_height="65dp" android:text="MON" android:textSize="16sp" android:layout_margin="5dp"/>
+            <Button android:id="@+id/btn_tue" style="@style/Widget.MaterialComponents.Button.UnelevatedButton" android:layout_width="95dp" android:layout_height="65dp" android:text="TUE" android:textSize="16sp" android:layout_margin="5dp"/>
+            <Button android:id="@+id/btn_wed" style="@style/Widget.MaterialComponents.Button.UnelevatedButton" android:layout_width="95dp" android:layout_height="65dp" android:text="WED" android:textSize="16sp" android:layout_margin="5dp"/>
+            <Button android:id="@+id/btn_thu" style="@style/Widget.MaterialComponents.Button.UnelevatedButton" android:layout_width="95dp" android:layout_height="65dp" android:text="THU" android:textSize="16sp" android:layout_margin="5dp"/>
+            <Button android:id="@+id/btn_fri" style="@style/Widget.MaterialComponents.Button.UnelevatedButton" android:layout_width="95dp" android:layout_height="65dp" android:text="FRI" android:textSize="16sp" android:layout_margin="5dp"/>
+            <Button android:id="@+id/btn_sat" style="@style/Widget.MaterialComponents.Button.UnelevatedButton" android:layout_width="95dp" android:layout_height="65dp" android:text="SAT" android:textSize="16sp" android:layout_margin="5dp"/>
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="20dp"
+                app:cardBackgroundColor="#1B5E20"
+                android:layout_marginBottom="20dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="24dp"
+                    android:weightSum="3">
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                        <TextView android:id="@+id/tv_total_cal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="#FFF" android:textStyle="bold" android:textSize="26sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="kcal" android:textColor="#BDBDBD" android:textSize="14sp"/>
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                        <TextView android:id="@+id/tv_total_pro" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="#FFF" android:textStyle="bold" android:textSize="26sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Protein" android:textColor="#BDBDBD" android:textSize="14sp"/>
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                        <TextView android:id="@+id/tv_total_carb" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="#FFF" android:textStyle="bold" android:textSize="26sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Carbs" android:textColor="#BDBDBD" android:textSize="14sp"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <include android:id="@+id/meal_breakfast" layout="@layout/item_meal_detail"/>
+            <include android:id="@+id/meal_lunch" layout="@layout/item_meal_detail"/>
+            <include android:id="@+id/meal_dinner" layout="@layout/item_meal_detail"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
